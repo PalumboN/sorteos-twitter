@@ -3,7 +3,7 @@ Promise = require('bluebird')
 request = Promise.promisifyAll require('request')
 crypto = require('crypto-js')
 moment = require('moment')
-Tweet = require('./schemas')
+#Tweet = require('./schemas')
 _ = require('lodash')
 
 Twitter = require('twitter');
@@ -17,7 +17,7 @@ client = new Twitter
 
 tweets = []
 
-track = process.env.SEARCH or "hola" #"#LaWimbledon"
+track = process.env.SEARCH or "#LaWimbledon"
 
 console.log "Searching " + track
 

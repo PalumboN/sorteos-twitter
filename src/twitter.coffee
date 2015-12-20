@@ -1,5 +1,4 @@
 oauthSignature = require('oauth-signature')
-mongoose = require('mongoose')
 Promise = require('bluebird')
 request = Promise.promisifyAll require('request')
 crypto = require('crypto-js')
@@ -16,11 +15,16 @@ client = new Twitter
   access_token_key : "187098812-8TENqL5JiDCDvJHflxtltHi70DNrUguIbsW06Zwv"
 
 
-track = process.env.SEARCH or "#LaWimbledon"
+tweets = []
+
+track = process.env.SEARCH or "hola" #"#LaWimbledon"
 
 console.log "Searching " + track
 
 client.stream 'statuses/filter', { track: track }, (stream) =>
   stream.on 'data', (tweet) =>
-    new Tweet(tweet).save()
+    #new Tweet(tweet).save()
+    tweets.push tweet
     console.log tweet
+
+module.exports = tweets

@@ -17,7 +17,7 @@ client = new Twitter
 
 tweets = []
 
-track = process.env.SEARCH "#LaWimbledon"
+track = process.env.SEARCH or "#LaWimbledon"
 
 console.log "Searching " + track
 

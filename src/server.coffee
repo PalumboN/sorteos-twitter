@@ -7,10 +7,10 @@ app = express()
 port = process.env.PORT || 3000
 
 app.get '/', (req, res) ->
-  res.send twitter
+  res.send twitter.tweets()
 
 app.get '/random', (req, res) ->
-  res.send _.sample twitter
+  res.send _.sample twitter.tweets()
 
 
 app.listen port, ->

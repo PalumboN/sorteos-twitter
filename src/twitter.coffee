@@ -17,7 +17,7 @@ client = new Twitter
 
 tweets = []
 
-track = process.env.SEARCH or "#LaWimbledon"
+track = process.env.SEARCH "#LaWimbledon"
 
 console.log "Searching " + track
 
@@ -25,6 +25,15 @@ client.stream 'statuses/filter', { track: track }, (stream) =>
   stream.on 'data', (tweet) =>
     #new Tweet(tweet).save()
     tweets.push tweet
-    console.log tweet
+    console.log toDto tweet
 
-module.exports = tweets
+toDto = (tweet) ->
+  message: tweet.text
+  user:
+    name: tweet.user.name
+    nick: tweet.user.screen_name
+  channel: "Tweeter"
+  created: tweet.created_at
+
+module.exports =
+  tweets: => tweets.map toDto

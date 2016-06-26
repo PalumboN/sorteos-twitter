@@ -1,10 +1,11 @@
+_ = require('lodash')
 express = require('express')
 twitter = require('./twitter')
-_ = require('lodash')
-
+config = require('./config')
 app = express()
 
-port = process.env.PORT || 3000
+port = config.port
+
 
 app.get '/', (req, res) ->
   res.send twitter.tweets()

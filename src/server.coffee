@@ -6,12 +6,15 @@ app = express()
 
 port = config.port
 
-
 app.get '/', (req, res) ->
-  res.send twitter.tweets()
+  twitter.tweets()
+  .then (tweets) ->
+    res.send tweets
 
 app.get '/random', (req, res) ->
-  res.send _.sample twitter.tweets()
+  twitter.tweets()
+  .then (tweets) ->
+    res.send _.sample tweets
 
 
 app.listen port, ->

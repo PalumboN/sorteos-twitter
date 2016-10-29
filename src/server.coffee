@@ -6,13 +6,22 @@ app = express()
 
 port = config.port
 
-app.get '/', (req, res) ->
+tweets = ->
   twitter.tweets()
+  .then (it) -> it.map toDTO
+
+toDTO = ({created_at:hora, user: {screen_name:usuario}, text:mensaje}) ->
+  {hora, usuario, mensaje}
+
+# ------------------------------------------------
+
+app.get '/', (req, res) ->
+  tweets()
   .then (tweets) ->
     res.send tweets
 
 app.get '/random', (req, res) ->
-  twitter.tweets()
+  tweets()
   .then (tweets) ->
     res.send _.sample tweets
 
